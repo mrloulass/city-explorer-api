@@ -12,9 +12,11 @@ const app = express();
 
 app.use(cors());// allow REACT app forntend to access data form server
 
+const superagent = require('superagent');
+
 const PORT = process.env.PORT || 3001;
 
-const weatherData = require('./data/weather.json'); // import the json file
+// const weatherData = require('./data/weather.json'); // import the json file
 
 
 function Forecast(day) {
@@ -22,24 +24,50 @@ function Forecast(day) {
   this.date = day.datetime;
 }
 
-function handleErrors(error, response) {
-  response.status(500).send('internal error');
+function Movies(infor) {
+  this.title = infor.results.title;
+  this.overview = infor.results.overview;
 }
+
+// function handleErrors(error, response) {
+//   response.status(500).send('Internal error');
+// }
+
+// app.get('/', (request, response) => {
+//   response.send('this is the server');
+// });
 
 // server definition goes next
 // servers are set up to listen at some path for particular method(get,post,put)
 // listening for GET request at the path /
 
 app.get('/weather', (request, response) => {
-  try {
-    const allForecastData = weatherData.data.map(day => new Forecast(day));
-    response.send(allForecastData);
-    // response.json(allForecastData);
-    console.log(allForecastData);
-  } catch (error) {
-    handleErrors(error, response);
-  }
+  superagent.get('https://api.weatherbit.io/v2.0/forecast/daily')
+    .query({
+      key: process.env.WEATHER_API_KEY,
+      units: 'I',
+      lat: request.query.lat,
+      lon: request.query.lon
+    })
+    .then(weatherData => {
+      response.send(weatherData.body.data.map(day => (new Forecast(day))));
+      console.log(weatherData.body.data);
+    })
+    .catch(err => (err.request, err.response));
 });
 
+app.get('/movies', (request, response) => {
+  superagent.get('https://api.themoviedb.org/3/search/movie')
+    .query({
+      api_key: process.env.MOVIE_API_KEY,
+      query: '',
+      lat: request.query.lat,
+      lon: request.query.lon
+    })
+    .then(movieInfor => {
+      response.send(movieInfor.body.results.map(infor => (new Movies(infor))));
+    })
+    .catch(err => (err.request, err.response));
+});
 
 app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
