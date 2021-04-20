@@ -25,8 +25,8 @@ function Forecast(day) {
 }
 
 function Movies(infor) {
-  this.title = infor.results.title;
-  this.overview = infor.results.overview;
+  this.title = infor.title;
+  this.overview = infor.overview;
 }
 
 // function handleErrors(error, response) {
@@ -51,7 +51,6 @@ app.get('/weather', (request, response) => {
     })
     .then(weatherData => {
       response.send(weatherData.body.data.map(day => (new Forecast(day))));
-      console.log(weatherData.body.data);
     })
     .catch(err => (err.request, err.response));
 });
@@ -60,9 +59,7 @@ app.get('/movies', (request, response) => {
   superagent.get('https://api.themoviedb.org/3/search/movie')
     .query({
       api_key: process.env.MOVIE_API_KEY,
-      query: '',
-      lat: request.query.lat,
-      lon: request.query.lon
+      query: request.query.city
     })
     .then(movieInfor => {
       response.send(movieInfor.body.results.map(infor => (new Movies(infor))));

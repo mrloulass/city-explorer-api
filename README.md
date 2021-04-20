@@ -68,13 +68,33 @@ Actual time needed to complete: 2hrs
 ![Request/Response Cycle of the Web Diagram](/images/wrrc2.png)
 
 ## Overview
-<!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
+Requesting data from my server to get data from third API Weatherbit and Themoviedb. Then render data to frontend.
 
 ## Getting Started
-<!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
+1. You will need to to get your own API key from [Weatherbit](https://www.weatherbit.io/) and [Themoviedb](https://www.themoviedb.org/)
+
+2. Add an .env file. Next add (.env) to your .gitignore file to hide API keys
+
+3. On your terminal you need to install dependencies: axios, cors, dotenv, express and superagent.
 
 ## Architecture
-<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
+[Node JS](https://nodejs.org/en/):As an asynchronous event-driven JavaScript runtime, Node.js is designed to build scalable network applications.
+
+[NPM JS](https://docs.npmjs.com/):Use to help share and borrow packages.
+
+[Express JS](http://expressjs.com/en/4x/api.html): A web frameork for Node.js
+
+[NPM JS package:dotenv](https://www.npmjs.com/package/dotenv): Storing configuration in the environment separate from the code base.
+
+[NPM JS package:cors](https://expressjs.com/en/resources/middleware/cors.html):Allow REACT app forntend to access data form server
+
+[NPM JS package:axios](https://www.npmjs.com/package/react-axios):This is intended to allow in render async requests.
+
+[Heroku](https://www.heroku.com/home): Used to up load server app.
+
+[Trello:project board](https://trello.com/en-US):Help manage projects.
+
+[SuperAgent](https://visionmedia.github.io/superagent/#test-documentation): to help request data from third party APIs and resposne back to frontend client
 
 ## Change Log
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
@@ -82,17 +102,20 @@ Actual time needed to complete: 2hrs
 01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
 
 ## Credit and Collaborations
-<!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+- Work with Michael Hendricks, Prabin Singh and Tom McGuire to figure about how to  request and response data from api.
 
+- Lecture and Instruction with Michelle Ferreirae and Ryan Gallaway
+
+- Assists from Joe Pennock 
 # Time Estimates
 
-Name of feature:
+Name of feature: Adding data from third party
 
-Estimate of time needed to complete: 
+Estimate of time needed to complete: 2 days
 
-Start time: 
+Start time: 6:00
 
-Finish time: 
+Finish time: 7:00
 
-Actual time needed to complete: 
+Actual time needed to complete: 4 days
 
