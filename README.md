@@ -196,3 +196,81 @@ Start time: 7:00
 Finish time: 10:00
 
 Actual time needed to complete: 3 hrs
+
+# city-explorer-api
+
+# Project Name: City Explorer Lab-10
+
+**Author**: Louis Lassegue
+
+**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+
+## The Request/Response Cycle of the Web
+
+![Request/Response Cycle of the Web Diagram](/img/wrrc-04.png)
+
+## Overview
+
+I'm adding Cache to my server so that I can see info without the app doing unnecessary API calls.
+
+## Getting Started
+
+1. Require in to your server.js a global object variable. to act as a place to store values that persist beyond individual request-response cycles. This type of server "memory" is referred to as a "cache".
+
+2. Check the cache for a recent API result for the value specified
+
+3. Use **If** statement if recent result is already stored in memory console.log("cache hit"), return that result, without querying the API again.
+
+**else** if no recent result is found console.log("cache miss"), query the API for a fresh result, add it to server memory with the time of retrieval, and return the fresh result.
+
+4. Choose an appropriate definition of "recent", the timespan beyond which you deem the data to be stale, and in need of updating ("cache invalidation").
+
+## Architecture
+
+[React](https://reactjs.org/)
+
+[React-Bootstrap](https://react-bootstrap.github.io/)
+
+[Axios](https://www.npmjs.com/package/axios)
+
+[LocationIQ](https://locationiq.com/)
+
+We are using React language to build the app. React-bootstrap for styling, Axios for requesting from the API LocationIQ.
+
+[Node JS](https://nodejs.org/en/):As an asynchronous event-driven JavaScript runtime, Node.js is designed to build scalable network applications.
+
+[NPM JS](https://docs.npmjs.com/):Use to help share and borrow packages.
+
+[Express JS](http://expressjs.com/en/4x/api.html): A web frameork for Node.js
+
+[NPM JS package:dotenv](https://www.npmjs.com/package/dotenv): Storing configuration in the environment separate from the code base.
+
+[NPM JS package:cors](https://expressjs.com/en/resources/middleware/cors.html):Allow REACT app forntend to access data form server
+
+[NPM JS package:axios](https://www.npmjs.com/package/react-axios):This is intended to allow in render async requests.
+
+[Heroku](https://www.heroku.com/home): Used to up load server app.
+
+[Trello:project board](https://trello.com/en-US):Help manage projects.
+
+[SuperAgent](https://visionmedia.github.io/superagent/#test-documentation): to help request data from third party APIs and resposne back to frontend client
+
+## Change Log
+
+04-23-2001 7:00pm - add Cache to my server
+
+## Credit and Collaborations
+
+- Lecture and Instruction with Michelle Ferreirae and Ryan Gallaway
+
+# Time Estimates
+
+Name of feature: Cache:Backend
+
+Estimate of time needed to complete: 2 hrs
+
+Start time: 7:00
+
+Finish time: 10:00
+
+Actual time needed to complete: 2 days

@@ -1,5 +1,7 @@
 'use strict';
 
+let cache = require('./modules/moviesCache.js');
+
 const superagent = require('superagent');
 
 function Movies(infor) {
@@ -9,16 +11,24 @@ function Movies(infor) {
 }
 
 const movies = (request, response) => {
-  superagent
-    .get('https://api.themoviedb.org/3/search/movie')
-    .query({
-      api_key: process.env.MOVIE_API_KEY,
-      query: request.query.city
-    })
-    .then(movieInfor => {
-      response.send(movieInfor.body.results.map(infor => (new Movies(infor))));
-    })
-    .catch(err => (err.request, err.response));
+  const key = request.query.city;
+  if (cache[key]) {
+    console.log('Cache hit');
+    let previousResponseData = cache[key];
+    response.status(200).send(previousResponseData);
+  } else {
+    console.log('Cache miss');
+    superagent
+      .get('https://api.themoviedb.org/3/search/movie')
+      .query({
+        api_key: process.env.MOVIE_API_KEY,
+        query: request.query.city
+      })
+      .then(movieInfor => {
+        cache[key] = movieInfor.body.results.map(infor => (new Movies(infor)));
+        response.status(200).send(movieInfor.body.results.map(infor => (new Movies(infor))));
+      })
+      .catch(err => response.status(500).send('error', err));
+  }
 };
-
 module.exports = movies;
