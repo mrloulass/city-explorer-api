@@ -12,9 +12,9 @@ function Movies(infor) {
 
 const movies = (request, response) => {
   const key = request.query.city;
-  if (cache[key]) {
+  if (cache[key] && (Date.now() - cache[key][0]) < (50000)) {
     console.log('Cache hit');
-    let previousResponseData = cache[key];
+    let previousResponseData = cache[key][1];
     response.status(200).send(previousResponseData);
   } else {
     console.log('Cache miss');
@@ -25,7 +25,7 @@ const movies = (request, response) => {
         query: request.query.city
       })
       .then(movieInfor => {
-        cache[key] = movieInfor.body.results.map(infor => (new Movies(infor)));
+        cache[key] = [Date.now(), movieInfor.body.results.map(infor => (new Movies(infor)))];
         response.status(200).send(movieInfor.body.results.map(infor => (new Movies(infor))));
       })
       .catch(err => response.status(500).send('error', err));
